@@ -1,11 +1,10 @@
 import cv2 as cv
 import numpy as np
 video=cv.VideoCapture(0)
-lower_red1 = np.array([100, 150, 50])
-upper_red1 = np.array([140, 255, 255])
+lower_blue = np.array([100, 150, 50])
+upper_blue = np.array([140, 255, 255])
 
-# lower_red2 = np.array([170, 120, 70])
-# upper_red2 = np.array([180, 255, 255])
+
 
 ret,frame=video.read()
 canvas=np.zeros_like(frame)
@@ -17,8 +16,8 @@ while True:
     mirror_video=cv.flip(frame,1)
     hsv=cv.cvtColor(mirror_video,cv.COLOR_BGR2HSV) 
 
-    b_mask=cv.inRange(hsv,lower_red1,upper_red1)
-    # b_mask=cv.inRange(hsv,lower_red2,upper_red2)
+    b_mask=cv.inRange(hsv,lower_blue,upper_blue)
+    
 
     blue=cv.bitwise_and(mirror_video,mirror_video,mask=b_mask)
 
